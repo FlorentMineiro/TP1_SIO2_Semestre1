@@ -109,6 +109,20 @@ public class TP1Controller implements Initializable {
 
     @FXML
     public void cboDestinatairesClicked(Event event) {
+        TreeItem racine = new TreeItem("Tous les messages");
+
+        // Parcourir la liste des messages du destinataire choisi dans la ComboBox
+        int nbMessages = 1 ;
+        for (Message message : maMessagerie.get(lstDestinataires.getSelectionModel().getSelectedItem().toString()))
+        {
+            TreeItem noeudMessage = new TreeItem("Message n°" + nbMessages);
+            TreeItem noeudDe = new TreeItem(message.getExpediteur());
+            TreeItem noeudContenu = new TreeItem<>(message.getContenuDuMessage());
+            noeudMessage.getChildren().add(noeudDe);
+            noeudMessage.getChildren().add(noeudContenu);
+            noeudMessage.setExpanded(true);
+            racine.getChildren().add(noeudMessage);
+        }
 
 
 
